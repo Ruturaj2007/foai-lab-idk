@@ -1,0 +1,291 @@
+:root {
+  /* Frieren Theme Colors */
+  --bg-dark-navy: #0d1117;
+  --bg-card: #141b22;
+  --forest-green: #1a2e1a;
+  --forest-green-light: #2d4a2d;
+  --misty-lavender: #c8b8d4;
+  --pale-moonlight: #f0ede8;
+  --gold-accent: #d4a843;
+  --gold-accent-hover: #f0c662;
+  --error-red: #8a2a2a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: var(--bg-dark-navy);
+  color: var(--pale-moonlight);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-image: radial-gradient(circle at 50% 0%, rgba(26, 46, 26, 0.4), transparent 40%),
+                    radial-gradient(circle at 100% 100%, rgba(200, 184, 212, 0.05), transparent 40%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: var(--gold-accent);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(212, 168, 67, 0.3);
+  letter-spacing: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Grimoire Card Style */
+.card {
+  background: linear-gradient(145deg, var(--bg-card), var(--forest-green));
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(200, 184, 212, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 5px; right: 5px; bottom: 5px; left: 5px;
+  border: 1px solid rgba(212, 168, 67, 0.1);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 168, 67, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(200, 184, 212, 0.1), 0 0 15px rgba(212, 168, 67, 0.2);
+}
+
+.card-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.card-title::after {
+  content: '✧';
+  position: absolute;
+  top: -10px;
+  right: -20px;
+  font-size: 1rem;
+  color: var(--misty-lavender);
+  opacity: 0.5;
+}
+
+.card-content {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  min-height: 150px;
+}
+
+/* Spell Cards (Buttons) */
+.btn {
+  font-family: 'Cinzel', serif;
+  background: transparent;
+  color: var(--gold-accent);
+  border: 1px solid var(--gold-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover:not(:disabled) {
+  background: rgba(212, 168, 67, 0.1);
+  box-shadow: 0 0 15px rgba(212, 168, 67, 0.4);
+  text-shadow: 0 0 5px var(--gold-accent);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #555;
+  color: #888;
+}
+
+/* Animations */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 10px var(--gold-accent); }
+}
+
+.loading {
+  color: var(--misty-lavender);
+  font-family: 'Cinzel', serif;
+  animation: sparkle 1.5s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error {
+  color: #ffcccc;
+  background: rgba(138, 42, 42, 0.4);
+  border: 1px solid var(--error-red);
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.error::before {
+  content: '⚠ Spell Failed: ';
+  font-family: 'Cinzel', serif;
+  color: var(--gold-accent);
+}
+
+/* Specific Card Styles */
+.dog-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid rgba(200, 184, 212, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.scroll-entry {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-left: 2px solid var(--gold-accent);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-style: italic;
+  width: 100%;
+}
+
+.joke-setup {
+  color: var(--pale-moonlight);
+  margin-bottom: 1rem;
+}
+
+.joke-punchline {
+  color: var(--gold-accent);
+  font-weight: 600;
+}
+
+.adventurer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.adventurer-pic {
+  border-radius: 50%;
+  border: 2px solid var(--gold-accent);
+  padding: 3px;
+  margin-bottom: 1rem;
+  width: 100px;
+  height: 100px;
+}
+
+.adventurer-info {
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.adventurer-info p {
+  margin: 0.3rem 0;
+  border-bottom: 1px dashed rgba(200, 184, 212, 0.2);
+  padding-bottom: 0.2rem;
+}
+
+.adventurer-info strong {
+  color: var(--misty-lavender);
+}
+
+.list-container {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.list-container::-webkit-scrollbar {
+  width: 6px;
+}
+.list-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+}
+.list-container::-webkit-scrollbar-thumb {
+  background: var(--forest-green-light);
+  border-radius: 3px;
+}
+
+.list-item {
+  background: rgba(45, 74, 45, 0.3);
+  border: 1px solid rgba(200, 184, 212, 0.1);
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+.list-item h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: var(--pale-moonlight);
+}
+.list-item p {
+  font-size: 0.95rem;
+  color: var(--misty-lavender);
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-group .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+}
+
+.action-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
