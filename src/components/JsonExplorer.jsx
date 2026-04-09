@@ -15,7 +15,9 @@ const JsonExplorer = () => {
     setDataType(type);
     
     try {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/${type}?_limit=5`);
+      // Pick a random starting point so the result changes 
+      const randomStart = Math.floor(Math.random() * 30);
+      const response = await fetch(`https://jsonplaceholder.typicode.com/${type}?_limit=1&_start=${randomStart}`);
       if (!response.ok) throw new Error(`Failed to fetch ${type}`);
       const json = await response.json();
       setData(json);
